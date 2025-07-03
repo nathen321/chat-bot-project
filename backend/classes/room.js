@@ -1,14 +1,14 @@
 class Room {
   constructor(createdBy) {
-    this.roomId = this.generateId("room"); // Auto-ID
-    this.createdBy = createdBy;            // Creator's userId
-    this.participants = [];
+    this.roomId = this.generateId("room");
+    this.createdBy = createdBy;
+    this.participants = [createdBy];
     this.messages = [];
     this.createdAt = new Date();
   }
 
   generateId(prefix) {
-    return `${prefix}-${Math.random().toString(36).substr(2, 6)}`;
+    return `${prefix}-${Math.random().toString(36).substring(2, 6)}`;
   }
 
   addParticipant(userId) {
@@ -17,15 +17,9 @@ class Room {
     }
   }
 
-  removeParticipant(userId) {
-    this.participants = this.participants.filter(id => id !== userId);
-  }
-
   addMessage(senderId, message) {
     this.messages.push({ senderId, message, timestamp: new Date() });
   }
-
-  getMessages() {
-    return this.messages;
-  }
 }
+
+module.exports = Room;
