@@ -1,9 +1,14 @@
 class Room {
-  constructor(roomId, createdBy) {
-    this.roomId = roomId;         // Unique room identifier
-    this.createdBy = createdBy;   // User ID of the creator
-    this.participants = [];       // List of user IDs
-    this.messages = [];           // Array of message objects { senderId, message, timestamp }
+  constructor(createdBy) {
+    this.roomId = this.generateId("room"); // Auto-ID
+    this.createdBy = createdBy;            // Creator's userId
+    this.participants = [];
+    this.messages = [];
+    this.createdAt = new Date();
+  }
+
+  generateId(prefix) {
+    return `${prefix}-${Math.random().toString(36).substr(2, 6)}`;
   }
 
   addParticipant(userId) {
@@ -17,19 +22,10 @@ class Room {
   }
 
   addMessage(senderId, message) {
-    const msg = {
-      senderId,
-      message,
-      timestamp: new Date()
-    };
-    this.messages.push(msg);
+    this.messages.push({ senderId, message, timestamp: new Date() });
   }
 
   getMessages() {
     return this.messages;
-  }
-
-  getParticipants() {
-    return this.participants;
   }
 }

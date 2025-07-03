@@ -1,9 +1,13 @@
 class User {
-  constructor(id, username, email) {
-    this.id = id;                 // Unique user ID
-    this.username = username;     // Display name
-    this.email = email;           // Email (optional)
-    this.joinedRooms = [];        // List of room IDs the user has joined
+  constructor(username = null, isAnonymous = false) {
+    this.userId = this.generateId("user"); // Auto-ID
+    this.username = username || `Guest${Math.floor(Math.random() * 9000) + 1000}`;
+    this.isAnonymous = isAnonymous;
+    this.joinedRooms = [];
+  }
+
+  generateId(prefix) {
+    return `${prefix}-${Math.random().toString(36).substr(2, 8)}`;
   }
 
   joinRoom(roomId) {
