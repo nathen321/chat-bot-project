@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ChatBox</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    input, button, textarea { padding: 8px; margin: 5px; width: 100%; }
+    #chatBox { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto; margin-top: 10px; background: #f9f9f9; }
+    .msg { margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <h2>ChatBox</h2>
+
+  <div>
+    <input id="username" placeholder="Enter username (or leave blank for anonymous)" />
+    <button onclick="createUser()">Create User</button>
+  </div>
+
+  <div>
+    <input id="roomId" placeholder="Enter room ID or leave empty to create new" />
+    <button onclick="joinRoom()">Join/Create Room</button>
+  </div>
+
+  <div id="chatUI" style="display:none;">
+    <div id="chatBox"></div>
+    <textarea id="message" placeholder="Type your message"></textarea>
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
