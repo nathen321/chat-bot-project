@@ -1,35 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ChatBox</title>
+  <meta charset="UTF-8">
+  <title>ChatBox Login / Signup</title>
   <style>
-    body { font-family: sans-serif; margin: 20px; }
-    input, button, textarea { padding: 8px; margin: 5px; width: 100%; }
-    #chatBox { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto; margin-top: 10px; background: #f9f9f9; }
-    .msg { margin-bottom: 8px; }
+    body { font-family: sans-serif; margin: 2rem; }
+    input, button { margin: 0.5rem 0; padding: 0.5rem; width: 100%; }
+    .box { max-width: 400px; margin: auto; border: 1px solid #ddd; padding: 2rem; border-radius: 8px; }
+    #output { color: green; margin-top: 1rem; }
   </style>
 </head>
 <body>
-  <h2>ChatBox</h2>
 
-  <div>
-    <input id="username" placeholder="Enter username (or leave blank for anonymous)" />
-    <button onclick="createUser()">Create User</button>
-  </div>
+<div class="box">
+  <h2 id="formTitle">Sign Up</h2>
 
-  <div>
-    <input id="roomId" placeholder="Enter room ID or leave empty to create new" />
-    <button onclick="joinRoom()">Join/Create Room</button>
-  </div>
+  <input type="text" id="username" placeholder="Username" required />
+  <input type="password" id="password" placeholder="Password" required />
+  <button onclick="submitForm()">Submit</button>
 
-  <div id="chatUI" style="display:none;">
-    <div id="chatBox"></div>
-    <textarea id="message" placeholder="Type your message"></textarea>
-    <button onclick="sendMessage()">Send</button>
-  </div>
+  <p>
+    <a href="#" onclick="toggleForm()">Switch to <span id="toggleLabel">Login</span></a>
+  </p>
 
-  <script src="script.js"></script>
+  <div id="output"></div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
