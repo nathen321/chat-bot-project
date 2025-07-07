@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const authRoutes = require("./routes/authRoutes");
 
 // Import route files
 const userRoutes = require("./routes/userRoutes");
@@ -26,7 +27,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/chatbox", {
 // 📦 Routes
 app.use("/api/users", userRoutes);   // /create
 app.use("/api/rooms", roomRoutes);   // /create
-// app.use("/api/messages", messageRoutes); // optional if messages are implemented
+app.use("/api/auth", authRoutes);
+
 
 // 🔁 Health check
 app.get("/", (req, res) => {
