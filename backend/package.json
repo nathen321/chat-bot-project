@@ -8,7 +8,7 @@
     "dev": "nodemon app.js"
   },
   "keywords": ["chat", "express", "mongodb", "api"],
-  "author": "Your Name",
+  "author": "walid jalaly",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",

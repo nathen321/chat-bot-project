@@ -2,9 +2,10 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
   userId: { type: String, required: true, unique: true },
-  username: { type: String, required: true },
-  isAnonymous: { type: Boolean, default: false },
-  joinedRooms: [String],
+  username: { type: String },
+  email: { type: String, unique: true, sparse: true },
+  password: { type: String }, // hashed password
+  isAnonymous: { type: Boolean, default: true },
   createdAt: { type: Date, default: Date.now }
 });
 
