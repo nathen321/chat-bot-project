@@ -35,7 +35,7 @@ async function submitForm() {
     localStorage.setItem("userId", data.userId);
 
     // ✅ Redirect to chat
-    window.location.href = "chat.html";
+    window.location.href = "rooms.html";
   } catch (err) {
     console.error("Auth error:", err);
     document.getElementById("output").innerText = "Failed to connect.";

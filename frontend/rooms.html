@@ -1,0 +1,76 @@
+<!-- frontend/rooms.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Room</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+    input, button { margin: 0.5rem 0; padding: 0.5rem; width: 100%; }
+    .box { max-width: 400px; margin: auto; border: 1px solid #ddd; padding: 2rem; border-radius: 8px; }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Welcome, <span id="userDisplay"></span> 👋</h2>
+
+  <button onclick="createRoom()">➕ Create New Room</button>
+
+  <h3>OR</h3>
+
+  <input type="text" id="roomIdInput" placeholder="Enter Room ID to Join" />
+  <button onclick="joinRoom()">🔗 Join Room</button>
+
+  <div id="output"></div>
+</div>
+
+<script>
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+  const username = localStorage.getItem("username");
+  const API = "http://localhost:5000/api";
+
+  if (!token) {
+    alert("You must be logged in.");
+    window.location.href = "index.html";
+  }
+
+  document.getElementById("userDisplay").textContent = username;
+
+  async function createRoom() {
+    try {
+      const res = await fetch(`${API}/rooms/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        body: JSON.stringify({ createdBy: userId })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        return (document.getElementById("output").innerText = data.error || "Could not create room");
+      }
+
+      // Save room info and go to chat
+      localStorage.setItem("roomId", data.roomId);
+      window.location.href = "chat.html";
+    } catch (err) {
+      document.getElementById("output").innerText = "Error creating room";
+    }
+  }
+
+  function joinRoom() {
+    const roomId = document.getElementById("roomIdInput").value.trim();
+    if (!roomId) return alert("Enter a room ID!");
+
+    localStorage.setItem("roomId", roomId);
+    window.location.href = "chat.html";
+  }
+</script>
+
+</body>
+</html>
