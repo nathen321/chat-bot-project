@@ -3,24 +3,25 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
 
-const SECRET_KEY = "your-secret-key"; // store in .env for production
+const SECRET_KEY = "I-solemnly-swear-that-I-am-up-to-no-good"; // store in .env for production
 
 exports.signup = async (req, res) => {
   const { email, password, username } = req.body;
 
   try {
-    const exists = await User.findOne({ email });
-    if (exists) return res.status(400).json({ error: "Email already exists" });
+    const { username, password } = req.body;
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+  const existing = await User.findOne({ username });
+  if (existing) return res.status(400).json({ error: "Username already taken" });
 
-    const user = new User({
-      userId: "user-" + uuidv4().slice(0, 8),
-      email,
-      username,
-      password: hashedPassword,
-      isAnonymous: false
-    });
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const user = new User({
+    userId: "user-" + uuidv4().slice(0, 8),
+    username,
+    password: hashedPassword,
+    isAnonymous: false
+  });
 
     await user.save();
 
@@ -33,10 +34,10 @@ exports.signup = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ username });
     if (!user) return res.status(404).json({ error: "User not found" });
 
     const match = await bcrypt.compare(password, user.password);

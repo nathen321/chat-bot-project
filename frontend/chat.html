@@ -1,0 +1,41 @@
+<!-- frontend/chat.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Room</title>
+  <style>
+    body { font-family: sans-serif; padding: 1rem; }
+    #messages { border: 1px solid #ddd; height: 300px; overflow-y: scroll; padding: 1rem; }
+    input, button { padding: 0.5rem; margin-top: 0.5rem; width: 100%; }
+  </style>
+</head>
+<body>
+
+<h2>Welcome, <span id="user"></span></h2>
+
+<div id="messages"></div>
+
+<input type="text" id="messageInput" placeholder="Type a message..." />
+<button onclick="sendMessage()">Send</button>
+
+<script>
+  const username = localStorage.getItem("username");
+  const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
+
+  document.getElementById("user").textContent = username || "Guest";
+
+  function sendMessage() {
+    const msg = document.getElementById("messageInput").value.trim();
+    if (!msg) return;
+
+    // Placeholder: real backend send logic would go here
+    const box = document.getElementById("messages");
+    box.innerHTML += `<p><strong>${username}:</strong> ${msg}</p>`;
+    document.getElementById("messageInput").value = "";
+  }
+</script>
+
+</body>
+</html>

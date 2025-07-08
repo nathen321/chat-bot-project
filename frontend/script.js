@@ -29,15 +29,16 @@ async function submitForm() {
       return (document.getElementById("output").innerText = data.error || "Something went wrong");
     }
 
+    // ✅ Save token and user info
     localStorage.setItem("token", data.token);
     localStorage.setItem("username", data.username);
     localStorage.setItem("userId", data.userId);
 
-    document.getElementById("output").innerText = `${isSignup ? "Signed up" : "Logged in"} as ${data.username}`;
-    console.log("Token stored:", data.token);
-    // Optional: redirect to chat.html or another page
+    // ✅ Redirect to chat
+    window.location.href = "chat.html";
   } catch (err) {
     console.error("Auth error:", err);
     document.getElementById("output").innerText = "Failed to connect.";
   }
 }
+
