@@ -1,27 +1,26 @@
 {
-  "name": "chatbox-backend",
+  "name": "chat-bot-backend",
   "version": "1.0.0",
-  "description": "ChatBox API backend with Express and MongoDB",
+  "description": "Real-time chat app backend using Express, MongoDB, and WebSocket",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start:ws": "node wsServer.js",
+    "dev": "nodemon app.js",
+    "dev:ws": "nodemon wsServer.js"
   },
-  "keywords": [
-    "chat",
-    "express",
-    "mongodb",
-    "api"
-  ],
-  "author": "walid jalaly",
-  "license": "ISC",
+  "keywords": ["chat", "websocket", "express", "realtime", "api", "nodejs"],
+  "author": "nathen321",
+  "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "mongoose": "^7.6.1",
-    "ws": "^8.18.3"
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.6.0",
+    "ws": "^8.13.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.2"
   }
 }
